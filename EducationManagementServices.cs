@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EducationManagementConsole
@@ -23,21 +24,31 @@ namespace EducationManagementConsole
         {
             while (true)
             {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Menu Principal :");
-                Console.WriteLine("Tapez 1 pour accéder au Menu de Gestion des élèves :");
-                Console.WriteLine("Tapez 2 pour accéder au Menu de Gestion des cours :");
-                Console.WriteLine("Tapez 0 pour Quitter :");
+                Console.ResetColor();
+                Console.WriteLine("----------------------------------");
+                Console.WriteLine("1 - Menu de Gestion des élèves :");
+                Console.WriteLine("2 - Menu de Gestion des cours :");
+                Console.WriteLine("0 - Quitter :");
+                Console.WriteLine("----------------------------------");
 
                 string choice = Console.ReadLine();
+                Console.Clear();
 
                 switch (choice)
                 {
                     case "1":
                         student.ManageStudents();
+                        dataHandler.LoadDataFromFiles();
+                        dataHandler.SaveDataToFiles();
                         break;
 
                     case "2":
                         course.ManageCourses();
+                        dataHandler.LoadDataFromFiles();
+                        dataHandler.SaveDataToFiles();
                         break;
 
                     case "0":

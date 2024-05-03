@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "MWBdwTH2SQWMYYVppkfSrAZd//IGMFWFoRNO24NN7cTNzSMQf8XpXRS/7QKfE3QSPhfGMyLu/p5+Ld5bGtTJng==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\pomai\\OneDrive\\Documents\\0 - POM\\Formation C# .Net\\POEC_Wild_Code\\EducationManagementConsole\\EducationManagementConsole.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\pomai\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
