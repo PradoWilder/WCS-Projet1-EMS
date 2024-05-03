@@ -1,44 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Text.Json;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace EducationManagementConsole
 {
     public class DataHandler
     {
-        private const string studentsFile = "students.json";
-        private const string coursesFile = "courses.json";
-        private const string logFile = "log.txt";
+        private const string dataFile = "data.json";
+        private const string logFile = "data.log";
 
-        public List<Student> students = new List<Student>();
-        public List<Course> courses = new List<Course>();
+        public List<Student> Students { get; set; } = new List<Student>();
+        public List<Course> Courses { get; set; } = new List<Course>();
 
-        public void LoadDataFromFiles() 
+        public void LoadDataFromFiles()
         {
-            if (File.Exists(studentsFile))
+            if (File.Exists(dataFile))
             {
-                string studentsJson = File.ReadAllText(studentsFile);
-                students = JsonSerializer.Deserialize<List<Student>>(studentsJson);    
-            }
-
-            if(File.Exists(coursesFile))
-            {
-                string coursesJson = File.ReadAllText(coursesFile);
-                courses = JsonSerializer.Deserialize<List<Course>>(coursesJson);
+                string jsonData = File.ReadAllText(dataFile);
+                var data = JsonConvert.DeserializeObject<Data>(jsonData);
+                Students = data.StudentData;
+                Courses = data.CourseData;
             }
         }
 
         public void SaveDataToFiles()
         {
-            string studentsJson = JsonSerializer.Serialize(students);
-            File.WriteAllText(studentsFile, studentsJson);
+            var data = new Data
+            {
+                StudentData = Students,
+                CourseData = Courses
+            };
 
-            string coursesJson = JsonSerializer.Serialize(courses);
-            File.WriteAllText(coursesFile, coursesJson);
+            string jsonData = JsonConvert.SerializeObject(data);
+            File.WriteAllText(dataFile, jsonData);
         }
+
+        public void LogAction(string action)
+        {
+            using (StreamWriter writer = new StreamWriter(logFile, true))
+            {
+                writer.WriteLine($"{DateTime.Now}: {action}");
+            }
+        }
+    }
+
+    public class Data
+    {
+        public List<Student> StudentData { get; set; } = new List<Student>();
+        public List<Course> CourseData { get; set; } = new List<Course>();
     }
 }
